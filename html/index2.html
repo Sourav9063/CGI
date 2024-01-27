@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <canvas
+      id="myCanvas"
+      width="2000"
+      height="2000"
+      style="border: 1px solid grey"
+    ></canvas>
+
+    <script>
+      // Javascript program for Bresenhams Line Generation
+
+      function plotPixel(x1, y1, x2, y2, dx, dy, decide) {
+        const c = document.getElementById("myCanvas");
+        const ctx = c.getContext("2d");
+
+        // pk is initial decision making parameter
+        // Note:x1&y1,x2&y2, dx&dy values are interchanged
+        // and passed in plotPixel function so
+        // it can handle both cases when m>1 & m<1
+        let pk = 2 * dy - dx;
+        for (let i = 0; i <= dx; i++) {
+          if (decide == 0) {
+            ctx.fillRect(x1, y1, 4, 4);
+          } else {
+            ctx.fillRect(y1, x1, 4, 4);
+          }
+
+          // checking either to decrement or increment the
+          // value if we have to plot from (0,100) to
+          // (100,0)
+          if (x1 < x2) x1++;
+          else x1--;
+          if (pk < 0) {
+            // decision value will decide to plot
+            // either x1 or y1 in x's position
+            if (decide == 0) {
+              pk = pk + 2 * dy;
+            } else pk = pk + 2 * dy;
+          } else {
+            if (y1 < y2) y1++;
+            else y1--;
+            pk = pk + 2 * dy - 2 * dx;
+          }
+        }
+      }
+      function slope(x1, y1, x2, y2) {
+        dx = Math.abs(x2 - x1);
+        dy = Math.abs(y2 - y1);
+        if (dx > dy) {
+          // passing argument as 0 to plot(x,y)
+          plotPixel(x1, y1, x2, y2, dx, dy, 0);
+        } else {
+          // passing argument as 1 to plot (y,x)
+          plotPixel(y1, x1, y2, x2, dy, dx, 1);
+        }
+      }
+
+      // Driver code
+      // let x1 = 200, y1 = 100, x2 = 400, y2 = 100, dx, dy;
+      // let x11 = 200, y11 = 100, x22 = 200, y22 = 400, dx1, dy1;
+      // plotPixel(x11, y11, x22, y22, dx1, dy1, 0);
+      slope(400, 100, 200, 100);
+      slope(200, 100, 200, 200);
+      slope(200, 200, 400, 200);
+      slope(400, 200, 400, 300);
+      slope(400, 300, 200, 300);
+
+      slope(500, 100, 600, 300);
+      slope(600, 300, 700, 100);
+      slope(700, 100, 800, 300);
+      slope(800, 300, 900, 100);
+
+      slope(1000, 100, 1100, 100);
+      slope(1000, 100, 1000, 200);
+      slope(1000, 200, 1100, 200);
+      slope(1000, 200, 1000, 300);
+      slope(1000, 300, 1100, 300);
+    </script>
+  </body>
+</html>
