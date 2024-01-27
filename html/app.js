@@ -5,6 +5,7 @@
 import { bresenhamCircle, midPointCircle } from "./functions/circles.js";
 import {
   axisParallelLine,
+  bresenhamLine,
   ddaLine,
   degreeLine45,
   drawLine,
@@ -38,4 +39,4 @@ midPointCircle(200, 100, 50, {
   fourth: true,
 });
 
-ddaLine(0, 0, 1600, 800);
+bresenhamLine(0, 0, 162, 8);

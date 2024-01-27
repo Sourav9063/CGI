@@ -3,29 +3,29 @@ import { putArrayOfPixels } from "./utils.js";
 export function slopeFn(x0, y0, x1, y1) {
   return (y1 - y0) / (x1 - x0);
 }
-export function bresenhamLine(x0, y0, x1, y1, slopeP) {
+export function bresenhamLine(x0p, y0p, x1p, y1p, slopeP) {
   const pixels = [];
-  const slope = slopeP || (y1 - y0) / (x1 - x0);
-  let x0t = x0;
-  let y0t = y0;
-  let x1t = x1;
-  let y1t = y1;
+  const slope = slopeP || (y1p - y0p) / (x1p - x0p);
+  let x0 = x0p;
+  let y0 = y0p;
+  let x1 = x1p;
+  let y1 = y1p;
   if (slope > 1) {
-    x0t = y0;
-    y0t = x0;
-    x1t = y1;
-    y1t = x1;
+    x0 = y0p;
+    y0 = x0p;
+    x1 = y1p;
+    y1 = x1p;
   }
 
-  let x = x0t;
-  let y = y0t;
-  let dx = x1t - x0t;
-  let dy = y1t - y0t;
+  let x = x0;
+  let y = y0;
+  let dx = x1 - x0;
+  let dy = y1 - y0;
   let dT = 2 * (dy - dx);
   let dS = 2 * dy;
   let d = 2 * dy - dx;
   pixels.push({ x, y });
-  while (x < x1t) {
+  while (x < x1) {
     x++;
     if (d < 0) {
       d += dS;
