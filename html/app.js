@@ -3,7 +3,12 @@
 // degreeLine45(10, 10, 90, 70);
 
 import { bresenhamCircle, midPointCircle } from "./functions/circles.js";
-import { ddaLine, drawLine } from "./functions/lines.js";
+import {
+  axisParallelLine,
+  ddaLine,
+  degreeLine45,
+  drawLine,
+} from "./functions/lines.js";
 
 // degreeLine45(10, 90, 90, 10);
 drawLine(1000, 300, 300, 3);
@@ -17,7 +22,7 @@ function drawSWE() {
   degreeLine45(210, 10, 410, 210);
 }
 
-// drawSWE();
+drawSWE();
 
 bresenhamCircle(100, 100, 50, {
   first: true,
@@ -33,4 +38,4 @@ midPointCircle(200, 100, 50, {
   fourth: true,
 });
 
-ddaLine(10, 20, 30, 400);
+ddaLine(0, 0, 1600, 800);

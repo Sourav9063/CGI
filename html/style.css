@@ -3,3 +3,14 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+body {
+  background-color: rgb(191, 191, 191);
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+
+canvas {
+  background-color: white;
+}
