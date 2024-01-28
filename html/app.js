@@ -1,7 +1,3 @@
-// axisParallelLine(10, 10, 90, 10);
-// axisParallelLine(10, 10, 10, 70);
-// degreeLine45(10, 10, 90, 70);
-
 import { bresenhamCircle, midPointCircle } from "./functions/circles.js";
 import {
   axisParallelLine,
@@ -13,83 +9,99 @@ import {
 } from "./functions/lines.js";
 import { ctx, putPixel } from "./functions/utils.js";
 
-// degreeLine45(10, 90, 90, 10);
-// drawLine(1000, 300, 300, 3);
 
-function drawSWE() {
-  // axisParallelLine(10, 10, 110, 10);
-  // axisParallelLine(10, 10, 10, 110);
-  // axisParallelLine(10, 110, 110, 110);
-  // axisParallelLine(110, 110, 110, 210);
-  // axisParallelLine(110, 210, 10, 210);
-  // degreeLine45(210, 10, 410, 210);
+// drawLine(100, 100, 150, 400);
+
+// drawLine(100, 100, 400, 100, true);
+
+const cX = 100;
+const cY = 100;
+const unit = 100;
+function lineUnit(x0, y0, x1, y1, isDot = false) {
+
+
+  drawLine(x0*unit+cX,y0*unit+cY,x1*unit+cX,y1*unit+cY,isDot)
+  
 }
 
-drawSWE();
+function circleUnit(x0, y0, r) {
 
-// bresenhamCircle(100, 100, 50, {
-//   first: true,
-//   second: true,
-//   third: true,
-//   fourth: true,
-// });
 
-// midPointCircle(200, 100, 50, {
-//   first: true,
-//   second: true,
-//   third: true,
-//   fourth: true,
-// });
-
-// bresenhamLine(0, 0, 162, 8);
-
-function drawS() {
-  drawLine(100, 100, 100, 200);
-  drawLine(150, 100, 150, 200);
-  drawLine(200, 100, 200, 200);
-  drawLine(250, 100, 250, 200);
-  drawLine(100, 300, 150, 200);
-  drawLine(150, 300, 200, 200);
-  drawLine(200, 300, 250, 200);
-  bresenhamCircle(175, 100, 25, {
-    first: false,
-    second: false,
-    third: true,
-    fourth: true,
-  });
-  bresenhamCircle(175, 100, 75, {
-    first: false,
-    second: false,
-    third: true,
-    fourth: true,
-  });
-  drawLine(100, 400, 100, 300);
-  drawLine(150, 400, 150, 300);
-  drawLine(200, 400, 200, 300);
-  drawLine(250, 400, 250, 300);
-  bresenhamCircle(175, 400, 25, {
-    first: true,
-    second: true,
-    third: false,
-    fourth: false,
-  });
-  bresenhamCircle(175, 400, 75, {
-    first: true,
-    second: true,
-    third: false,
-    fourth: false,
-  });
-
-  drawLine(100, 200, 150, 200);
-  drawLine(200, 300, 250, 300);
+  bresenhamCircle(x0*unit+cX,y0*unit+cY,r)
+  
 }
 
-drawS();
 
-function test() {
-  const circle = bresenhamCircle(800, 400, 400);
-  for (const circlePixel of circle) {
-    drawLine(800, 400, circlePixel.x, circlePixel.y);
-  }
+
+function shohidMinar() {
+
+
+  lineUnit(2, 0, 17, 0)
+  lineUnit(1, 1, 18, 1, true)
+  lineUnit(0, 2, 19, 2)
+  lineUnit(0, 2, 1, 1, true)
+  lineUnit(18, 1, 19, 2, true)
+  lineUnit(2, 0, 1, 1)
+  lineUnit(17, 0, 18, 1)
+
+
+  lineUnit(4, 2, 4, 11)
+  lineUnit(6, 2, 6, 11)
+  lineUnit(4, 11, 6, 11)
+
+  lineUnit(15, 2, 15, 11)
+  lineUnit(17, 2, 17, 11)
+  lineUnit(15, 11, 17, 11)
+
+  circleUnit(10, 7, 140)
+
+  // bresenhamLineAllSlope(400,100,400,160)
+
+  
+
+  lineUnit(8, 11, 10, 13)
+  lineUnit(10, 11, 12, 13)
+  lineUnit(12, 11, 14, 13)
+  lineUnit(10, 13, 14, 13)
+
+
+
+  lineUnit(8, 2, 8, 5)
+  lineUnit(8, 9, 8, 11)
+  lineUnit(10, 2, 10, 4.2)
+  lineUnit(10, 9.8, 10, 11)
+
+  lineUnit(12, 2, 12, 5)
+  lineUnit(12, 9, 12, 11)
+
+
+
+    
+
 }
-test();
+
+// shohidMinar()
+
+
+function draw2024() {
+  
+  lineUnit(0, 3, 1, 2.5, true)
+  lineUnit(0, 2, 1, 2.5)
+  lineUnit(0, 2, 1, 1.5, true)
+  
+  lineUnit(2, 1.5, 3, 1.5)
+  lineUnit(2, 3, 3, 3)
+  lineUnit(2, 3, 2, 1.5)
+  lineUnit(3, 3, 3, 1.5)
+
+  lineUnit(4, 3, 5, 2.5, true)
+  lineUnit(4, 2, 5, 2.5)
+  lineUnit(4, 2, 5, 1.5, true)
+
+  lineUnit(6, 2.3, 6, 3.2)
+  lineUnit(6, 2.3, 7, 2.3)
+  lineUnit(6.8, 2.5, 6.8, 1.5)
+
+}
+
+draw2024()  

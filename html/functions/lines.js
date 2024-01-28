@@ -1,5 +1,6 @@
 import { putArrayOfPixels } from "./utils.js";
 
+const dotGap = 5;
 export function slopeFn(x0, y0, x1, y1) {
   return (y1 - y0) / (x1 - x0);
 }
@@ -84,7 +85,8 @@ export function bresenhamLine(x0p, y0p, x1p, y1p, slopeP) {
   return pixels;
 }
 
-export const bresenhamLineAllSlope = (x0, y0, x1, y1) => {
+export const bresenhamLineAllSlope = (x0, y0, x1, y1,slope ,isDot = false) => {
+  console.log(isDot);
   const pixels = [];
   let dx = Math.abs(x1 - x0);
   let dy = Math.abs(y1 - y0);
@@ -100,13 +102,13 @@ export const bresenhamLineAllSlope = (x0, y0, x1, y1) => {
     isBaseY = true;
   }
   let d = 2 * dy - dx;
-  for (let i = 1; i <= dx; i++) {
-    pixels.push({ x, y });
+  for (let i = 1; i <= dx; isDot?i=i+dotGap:i=i+1) {
+    pixels.push({x,y})
     while (d > 0) {
       if (isBaseY) {
         x = x + signX;
       } else {
-        y = y + signY;
+        y = y + signY*(isDot?dotGap:1);
       }
       d = d - 2 * dx;
     }
@@ -121,16 +123,18 @@ export const bresenhamLineAllSlope = (x0, y0, x1, y1) => {
   return pixels;
 };
 
-export function axisParallelLine(x0, y0, x1, y1) {
+export function axisParallelLine(x0, y0, x1, y1, isDot = false) {
   const pixels = [];
   if (x0 === x1) {
     while (y0 !== y1) {
-      pixels.push({ x: x0, y: y0 });
+      if (isDot && (Math.abs(y0) % dotGap === 0)) pixels.push({ x: x0, y: y0 });
+      if (!isDot) pixels.push({ x: x0, y: y0 });
       y0 += y0 < y1 ? 1 : -1;
     }
   } else if (y0 === y1) {
     while (x0 !== x1) {
-      pixels.push({ x: x0, y: y0 });
+      if (isDot && (Math.abs(x0) % dotGap === 0)) pixels.push({ x: x0, y: y0 });
+      if (!isDot)pixels.push({ x: x0, y: y0 });
       x0 += x0 < x1 ? 1 : -1;
     }
   }
@@ -138,14 +142,15 @@ export function axisParallelLine(x0, y0, x1, y1) {
   return pixels;
 }
 
-export function degreeLine45(x0, y0, x1, y1) {
+export function degreeLine45(x0, y0, x1, y1,isDot=false) {
   const pixels = [];
 
   const xInc = x0 < x1 ? 1 : -1;
   const yInc = y0 < y1 ? 1 : -1;
 
   while (x0 !== x1 && y0 !== y1) {
-    pixels.push({ x: x0, y: y0 });
+    if (isDot && (Math.abs(x0) % dotGap === 0)) pixels.push({ x: x0, y: y0 });
+    if (!isDot)pixels.push({ x: x0, y: y0 });
     x0 += xInc;
     y0 += yInc;
   }
@@ -190,17 +195,17 @@ export function linePointSwap(x0p, y0p, x1p, y1p, slopeT) {
   return { x0: x0p, y0: y0p, x1: x1p, y1: y1p };
 }
 
-export function drawLine(x0p, y0p, x1p, y1p) {
+export function drawLine(x0p, y0p, x1p, y1p, isDot = false) {
   const slope = slopeFn(x0p, y0p, x1p, y1p);
   const { x0, y0, x1, y1 } = linePointSwap(x0p, y0p, x1p, y1p, slope);
 
   if (x0 === x1 || y0 === y1) {
-    return axisParallelLine(x0, y0, x1, y1);
+    return axisParallelLine(x0, y0, x1, y1, isDot);
   }
 
   if (slope === 1 || slope === -1) {
-    return degreeLine45(x0, y0, x1, y1);
+    return degreeLine45(x0, y0, x1, y1,isDot);
   }
 
-  return bresenhamLine2(x0, y0, x1, y1, slope);
+  return bresenhamLineAllSlope(x0, y0, x1, y1, slope, isDot);
 }
