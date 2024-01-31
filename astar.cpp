@@ -34,6 +34,7 @@ void AStarSearch(unordered_map<int, vector<pair<int, int>>> graph, int start, in
   {
     Node current_node = open_list.top();
     open_list.pop();
+    cout << values[current_node.id] << endl;
     vector<int> path;
     if (heuristic[values[current_node.id]] == 0)
     {
